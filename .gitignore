@@ -21,3 +21,7 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# keys and sens information
+src/base.js
+data/clientInfo.js
