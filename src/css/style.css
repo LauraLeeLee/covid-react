@@ -1,3 +1,41 @@
 body {
   background: #5ee8e3;
+  text-align: center;
+}
+
+.header-title {
+  margin-top: 90px;
+  font-size: 60px;
+  /* z-index: 9; */
+  color: #fff;
+  text-shadow: 3px 3px #7c0404;
+}
+
+.header-img {
+  width: 20%;
+  /* opacity: 0.5; */
+  position: relative;
+  top: -170px;
+  left: -300px;
+  margin-bottom: -100px;
+}
+
+.data-div {
+  display: inline-block;
+  border: 2px solid #8c8c8c;
+  /* width: 50%; */
+  margin: 0 auto 20px;
+  text-align: left;
+  padding: 15px;
+  padding-bottom: 30px;
+  font: 20px "Trebuchet MS", Helvetica, sans-serif;
+}
+
+.data-div p {
+  margin-bottom: -15px;
+}
+
+.data-titles {
+  font-weight: bold;
+  font-size: 24px;
 }
