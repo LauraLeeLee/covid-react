@@ -50,39 +50,31 @@ class SelectedState extends React.Component {
     console.log("selected state api: ", selectedStateApi);
     const entries = selectedStateApi.confirmed;
 
-   
-    console.log("apiData2: ", apiData2);
     if(apiData2.length > 0) {
-       const date2 = apiData2[0].date;
-    console.log("api2date: ", date2);
-  }
+      console.log("apiData2: ", apiData2);
+      const apiDate = apiData2[0][0].date;
+      console.log("apiDate: ", apiDate);
+    }
    
-    
-
+   let stateDataRender;
+   if(Object.keys(selectedStateApi).length > 0 && apiData2.length > 0 ) {
+     stateDataRender =   <div className="data-div">
+     <p><span className="data-name">State: {selectedStateApi.province || "Name not loaded" }</span></p>
+     <p> <span className="data-titles">Date:</span> { apiData2[0][0].date || "Date not loaded"}</p>
+     <p> <span className="data-titles">Confirmed Cases:</span>{selectedStateApi.confirmed || "confirmed cases not loaded"}</p>
+     <p> <span className="data-titles">Deaths:</span> {selectedStateApi.deaths || 0 }</p>
+   </div>
+   } else {
+     stateDataRender = '';
+   }
+   
     return (
       <div>
         <h2>User Selected State</h2>
         <SelectComp label="State" 
           handleChange={this.handleChange}
           />
-          {/* {selectedStateApi.length > 0 && Object.entries(selectedStateApi).map(data => 
-            <div className="data-div">
-              <p><span className="data-name">State: {data.province || "Name not loaded" }</span></p>
-              <p> <span className="data-titles">Date:</span> {data.lastUpdate || "Date not loaded"}</p>
-              <p> <span className="data-titles">Confirmed Cases:</span> {data.confirmed || "confirmed cases not loaded"}</p>
-              <p> <span className="data-titles">Deaths:</span> {data.deaths || 0 }</p>
-            </div>
-           ) 
-          } */}
-          {selectedStateApi && 
-            <div className="data-div">
-            <p><span className="data-name">State: {selectedStateApi.province || "Name not loaded" }</span></p>
-            <p> <span className="data-titles">Date:</span> { apiData2.date || "Date not loaded"}</p>
-            <p> <span className="data-titles">Confirmed Cases:</span>{selectedStateApi.confirmed || "confirmed cases not loaded"}</p>
-            <p> <span className="data-titles">Deaths:</span> {selectedStateApi.deaths || 0 }</p>
-          </div>
-          }
-          
+            {stateDataRender}
       </div>
     )
   }
@@ -98,3 +90,21 @@ export default SelectedState;
           <p> <span className="data-titles">Deaths:</span> {data.deaths || 0 }</p>
         </div>
           )}  */}
+
+                 {/* {selectedStateApi.length > 0 && Object.entries(selectedStateApi).map(data => 
+            <div className="data-div">
+              <p><span className="data-name">State: {data.province || "Name not loaded" }</span></p>
+              <p> <span className="data-titles">Date:</span> {data.lastUpdate || "Date not loaded"}</p>
+              <p> <span className="data-titles">Confirmed Cases:</span> {data.confirmed || "confirmed cases not loaded"}</p>
+              <p> <span className="data-titles">Deaths:</span> {data.deaths || 0 }</p>
+            </div>
+           ) 
+          } */}
+          {/* {selectedStateApi && apiData2.length > 0 &&
+            <div className="data-div">
+            <p><span className="data-name">State: {selectedStateApi.province || "Name not loaded" }</span></p>
+            <p> <span className="data-titles">Date:</span> { apiData2[0].date || "Date not loaded"}</p>
+            <p> <span className="data-titles">Confirmed Cases:</span>{selectedStateApi.confirmed || "confirmed cases not loaded"}</p>
+            <p> <span className="data-titles">Deaths:</span> {selectedStateApi.deaths || 0 }</p>
+          </div>
+          } */}

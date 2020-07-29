@@ -12,6 +12,7 @@ class SelectedCountry extends React.Component {
  
   render() {
     const {selectedApiData} = this.props;
+    console.log('selectedCountryApi: ', selectedApiData);
     return(
       <div>
         <h2>User Selected Country</h2>
@@ -28,6 +29,14 @@ class SelectedCountry extends React.Component {
           <p> <span className="data-titles">Deaths:</span> {data.deaths || 0 }</p>
         </div>
           )}  
+          {/* {selectedApiData && 
+             <div key={selectedApiData[0].code}
+             className="data-div">
+          <p> <span className="data-titles">Date:</span> {selectedApiData[0].lastUpdate || "Date not loaded"}</p>
+          <p> <span className="data-titles">Country:</span> {selectedApiData[0].country || "country name not loaded"}</p>
+          <p> <span className="data-titles">Confirmed Cases:</span> {selectedApiData[0].confirmed || "confirmed cases not loaded"}</p>
+          <p> <span className="data-titles">Deaths:</span> {selectedApiData[0].deaths || 0 }</p>
+        </div>} */}
       </div>
     )
 

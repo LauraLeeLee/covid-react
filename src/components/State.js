@@ -24,7 +24,7 @@ class StateComp extends React.Component {
     )
     .then(response => response.json()
     ).then(data => {
-      // console.log("fetchSelectedState:", data);
+      console.log("fetchSelectedState:", data);
       // console.log('DATE: ', data[0].date);
       this.setState({apiData2: [...this.state.apiData2, data]});
       this.setState({apiProvinces: data[0].provinces});
@@ -89,7 +89,8 @@ class StateComp extends React.Component {
           </div>
       )}
       { myProvinces.length > 0 && myProvinces.map(data =>
-         <div className="data-div">
+         <div className="data-div"
+              key={data.province}>
           <p> <span className="data-titles">State:</span> {data.province || "State name not loaded"}</p>
           <p> <span className="data-titles">Date:</span> {data.date || "Date not loaded"}</p>
           <p> <span className="data-titles">Confirmed Cases:</span> {data.confirmed || "confirmed <cases></cases> not loaded"}</p>
