@@ -24,4 +24,4 @@ yarn-error.log*
 
 # keys and sens information
 src/base.js
-data/clientInfo.js
+src/data/clientInfo.js

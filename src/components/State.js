@@ -72,6 +72,7 @@ class StateComp extends React.Component {
       console.log(apiData2);
       if(apiProvinces.length >0 ) {
       console.log('provinces:', apiProvinces);
+      console.log('mycities', myProvinces);
       // console.log(apiData2[0].provinces[0].province);
       }
     }
@@ -87,7 +88,16 @@ class StateComp extends React.Component {
             <p> <span className="data-titles">Deaths:</span> {data[0].deaths || 0 ||  "total deaths not loaded"}</p>
           </div>
       )}
-   <SelectedState />
+      { myProvinces.length > 0 && myProvinces.map(data =>
+         <div className="data-div">
+          <p> <span className="data-titles">State:</span> {data.province || "State name not loaded"}</p>
+          <p> <span className="data-titles">Date:</span> {data.date || "Date not loaded"}</p>
+          <p> <span className="data-titles">Confirmed Cases:</span> {data.confirmed || "confirmed <cases></cases> not loaded"}</p>
+          <p> <span className="data-titles">Deaths:</span> {data.deaths || 0 ||  "total deaths not loaded"}</p>
+
+         </div>
+        )}
+   <SelectedState apiData2={apiData2}/>
    </div>
   )}
 }
