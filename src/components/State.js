@@ -24,8 +24,8 @@ class StateComp extends React.Component {
     )
     .then(response => response.json()
     ).then(data => {
-      console.log("fetchSelectedState:", data);
-      // console.log('provinces: ', data[0].provinces);
+      // console.log("fetchSelectedState:", data);
+      // console.log('DATE: ', data[0].date);
       this.setState({apiData2: [...this.state.apiData2, data]});
       this.setState({apiProvinces: data[0].provinces});
       return data;
@@ -47,9 +47,9 @@ class StateComp extends React.Component {
            province.province === "Texas" || 
            province.province === "Arizona";
   });
-    console.log(filtered);
+    // console.log(filtered);
     this.setState({myProvinces: filtered});
-    console.log(this.state.myProvinces);
+    // console.log(this.state.myProvinces);
   }
 }
   
@@ -67,12 +67,12 @@ class StateComp extends React.Component {
   render() {
     const {apiData2, apiProvinces, myProvinces } = this.state;
     console.log(myProvinces);
-    
+   
     if(apiData2.length > 0) {
-      console.log(apiData2);
+      // console.log(apiData2);
       if(apiProvinces.length >0 ) {
-      console.log('provinces:', apiProvinces);
-      console.log('mycities', myProvinces);
+      // console.log('provinces:', apiProvinces);
+      // console.log('mycities', myProvinces);
       // console.log(apiData2[0].provinces[0].province);
       }
     }
@@ -94,7 +94,6 @@ class StateComp extends React.Component {
           <p> <span className="data-titles">Date:</span> {data.date || "Date not loaded"}</p>
           <p> <span className="data-titles">Confirmed Cases:</span> {data.confirmed || "confirmed <cases></cases> not loaded"}</p>
           <p> <span className="data-titles">Deaths:</span> {data.deaths || 0 ||  "total deaths not loaded"}</p>
-
          </div>
         )}
    <SelectedState apiData2={apiData2}/>
