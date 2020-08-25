@@ -6,7 +6,8 @@ import { apiKey } from '../data/clientInfo.js';
 
 class SelectedState extends React.Component {
   static propTypes = {
-    apiData2: PropTypes.array
+    apiData2: PropTypes.array,
+    fetchStateCovid: PropTypes.func
   } 
 
   state = {
@@ -15,24 +16,26 @@ class SelectedState extends React.Component {
   }
 
   handleChange = async(event) => {
-    console.log(event.currentTarget.value);
-    await this.setState({selectState: event.currentTarget.value});
-    console.log("state selected: ", this.state.selectState);
-    // this.selectedStateFetch(this.state.selectState)
+    console.log(event.label);
+    await this.setState({selectState: event.label});
+    // console.log("state selected: ", this.state.selectState);
+
+    // this.selectedStateFetch(this.state.selectState);
     this.findSelected(this.state.selectState);  
+    this.props.fetchStateCovid(this.state.selectState);
   }
 
   findSelected = async(pickedState) => {
-    console.log(this.props.apiData2);
+    // console.log(this.props.apiData2);
     let apiProvinces;
     if(this.props.apiData2.length > 0) {
-      console.log("api states in selectedState:", this.props.apiData2);
-      console.log(this.props.apiData2[0][0].country);
-      console.log(this.props.apiData2[0][0].date);
-      console.log(this.props.apiData2[0][0].provinces);
+      // console.log("api states in selectedState:", this.props.apiData2);
+      // console.log(this.props.apiData2[0][0].country);
+      // console.log(this.props.apiData2[0][0].date);
+      // console.log(this.props.apiData2[0][0].provinces);
        apiProvinces = this.props.apiData2[0][0].provinces;
     }
-    console.log(apiProvinces);
+    // console.log(apiProvinces);
 
       if(apiProvinces.length > 0) {
        let find = apiProvinces.find(function(result) {
@@ -40,20 +43,20 @@ class SelectedState extends React.Component {
           return result.province === pickedState;
         });
          this.setState({selectedStateApi: find});
-        console.log("find: ", this.state.selectedStateApi); 
+        // console.log("find: ", this.state.selectedStateApi); 
      }
   }
  
   render() {
     const {apiData2} = this.props;
     const {selectedStateApi} = this.state;
-    console.log("selected state api: ", selectedStateApi);
+    // console.log("selected state api: ", selectedStateApi);
     const entries = selectedStateApi.confirmed;
 
     if(apiData2.length > 0) {
-      console.log("apiData2: ", apiData2);
+      // console.log("apiData2: ", apiData2);
       const apiDate = apiData2[0][0].date;
-      console.log("apiDate: ", apiDate);
+      // console.log("apiDate: ", apiDate);
     }
    
    let stateDataRender;
@@ -71,10 +74,10 @@ class SelectedState extends React.Component {
     return (
       <div>
         <h2>User Selected State</h2>
-        <SelectComp label="State" 
-          handleChange={this.handleChange}
+        <SelectComp name="State" 
+                    handleChange={this.handleChange}
           />
-            {stateDataRender}
+        {stateDataRender}     
       </div>
     )
   }

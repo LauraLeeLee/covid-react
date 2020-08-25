@@ -17,9 +17,9 @@ class Country extends React.Component {
     }
    
     handleChange =async(event) => {
-      console.log(event.currentTarget.value);
-      await this.setState({selectCountry: event.currentTarget.value});
-      console.log("selected:", this.state.selectCountry)
+      console.log(event.value);
+      await this.setState({selectCountry: event.value});
+      // console.log("selected:", this.state.selectCountry)
       this.selectedCountryFetch(this.state.selectCountry);
     }
 
@@ -84,7 +84,7 @@ class Country extends React.Component {
     this.setState({selectedApiData: data});
       // console.log('selected state:', this.state);
       // if(this.state.apiData.length > 0) {
-      // // console.log(this.state.apiData[0][0].confirmed, this.state.apiData[1], this.state.apiData[2]);
+      // console.log(this.state.apiData[0][0].confirmed, this.state.apiData[1], this.state.apiData[2]);
       // }
       return data;
     })

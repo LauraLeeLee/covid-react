@@ -1,8 +1,8 @@
 import React from 'react';
-// import Select from 'react-select';
+import Select from 'react-select';
 import PropTypes from 'prop-types';
-import {countriesData1} from '../data/countries-data.js';
-import {stateData3} from '../data/states-data.js';
+import {countriesData4} from '../data/countries-data.js';
+import {statesData4} from '../data/states-data.js';
 
 class SelectComp extends React.Component {
   static propTypes = {
@@ -10,56 +10,61 @@ class SelectComp extends React.Component {
     handleChange: PropTypes.func
   }
 
-  // state = {
-  //   selectCountry: ''
-  // }
-  // handleChange =(event) => {
-  //   console.log(event.currentTarget.value);
-  //   this.setState({selectCountry: event.currentTarget.value});
-
-  // }
-  constructor(props) {
-    super(props);
-    this.state = {
-      countryList: countriesData1,
-      stateList: stateData3,
+  state = {
+      countryList: countriesData4,
+      stateList: statesData4,
     }
-  }
 
   render() {
-    const {stateList} = this.state;
-    
-    const optionsCountry = Object.entries(this.state.countryList).map((entry, _) => {
-      let key = entry[0]
-      let value = entry[1]
-      return <option key={key}
-                     value={key}>
-                       {value}
-              </option>
-     });
+    const {stateList, countryList} = this.state;
+    // console.log('original list country', countryList);
+    // console.log('original list state', stateList);
 
-    //  const optionsState = Object.entries(this.state.stateList).map((entry, _) => {
+
+    // const optionsCountry = Object.entries(countryList).map((entry, _) => {
     //   let key = entry[0]
     //   let value = entry[1]
     //   return <option key={key}
-    //                  value={key}>
+    //                  value={value}>
     //                    {value}
     //           </option>
     //  });
+    const optionsAgain = [{
+      label: 'USA',
+      value: '1'
+    }, {
+      label: 'argentina',
+      value: '2'
+    },{
+      label: 'canada',
+      value: '3'
+    }
+  ]
 
-    const optionsState = stateList.map(data => {
-    
-           return <option key={data}
-                   value={data}>
-                     {data}
-              </option>
+    const countries = countryList.map(country => ({value: country.code, label: country.name}));
+
+    // console.log('countries: ', countries);
+    const optionsCountry = countries.map(country => {
+      return <option key={country.value}
+                      value={country.label}>
+                      {country.label}
+
+      </option>
     })
-
+    const optionsState = stateList.map(data => {
+      return <option key={data.abbreviation}
+              value={data.name}>
+                {data.name}
+             </option>
+    });
+ 
     let options;
-    if(this.props.label === "Country") {
-      options = optionsCountry;
+    if(this.props.name === "Country") {
+      options = countryList;
+      // console.log('options country: ',options);
     } else {
-      options = optionsState;
+      options = stateList;
+      // console.log('options state: ',options);
     }
 
     // {console.log('countryList:', this.state.countryList)}
@@ -67,16 +72,64 @@ class SelectComp extends React.Component {
    
     return (
       <div>
-        <select name={`${this.props.label}`} 
-              className="select-options {`select-${props.label}`}"
+        <Select name={`${this.props.name}`} 
+              className={`select-options select-${this.props.name}`}
               onChange={this.props.handleChange}
-              >
-                {options} 
-        </select>
-       <p></p>
+              placeholder= {this.props.name === "Country" ? "Select Country" : "Select State"}
+              options={options}
+              />  
+
+
+        {/* <select required
+                name={`${this.props.name}`} 
+                className={ `select-options select-${this.props.name}` }
+                onChange={this.props.handleChange}>
+                  <option value=""
+                          className="option-placeholder"
+                          hidden> Select {this.props.name}</option>
+                   {options} 
+        </select> */}
+
       </div>
     )
   }
 }
 
 export default SelectComp;
+
+      // state = {
+  //   selectCountry: ''
+  // }
+  // handleChange =(event) => {
+  //   console.log(event.currentTarget.value);
+  //   this.setState({selectCountry: event.currentTarget.value});
+
+  // }
+
+    // logic to render options when using react-select
+    // react-select seems to change the structure of the data lists
+    // const optionsCountry = Object.entries(countryList).map((entry) => {
+    //   let key = entry[0]
+    //   let value = entry[1]
+    //   return <option key={key}
+    //                  value={value}>
+    //                    { value }
+    //           </option>
+    //  });
+    
+    //  const optionsState = Object.entries(stateList).map((entry) => {
+    //   return <option key={entry.key}
+    //             value={entry.key}>
+    //             {entry.key}
+    //           </option>
+    //  });
+
+
+    // let options;
+    // if(this.props.name === "Country") {
+    //   options = optionsCountry;
+    //   console.log('options country: ',options);
+    // } else {
+    //   options = optionsState;
+    //   console.log('options state: ',options);
+    // }

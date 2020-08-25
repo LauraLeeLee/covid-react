@@ -36,7 +36,7 @@ class StateComp extends React.Component {
   }
 
 
-  filterCities = () => {
+  filterStates = () => {
   if(this.state.apiProvinces.length > 0 ) {   
     const filtered = this.state.apiProvinces.filter(function(province) {
     return province.province ==="New York" || 
@@ -60,13 +60,13 @@ class StateComp extends React.Component {
     }.bind(this), 6000);
 
     setTimeout(function() {
-      this.filterCities()
+      this.filterStates()
     }.bind(this), 8000);
   }
 
   render() {
     const {apiData2, apiProvinces, myProvinces } = this.state;
-    console.log(myProvinces);
+    // console.log(myProvinces);
    
     if(apiData2.length > 0) {
       // console.log(apiData2);
@@ -80,14 +80,6 @@ class StateComp extends React.Component {
     return(
       <div>
         <h2>States Component</h2>
-        {apiData2.length > 0 && apiData2.map(data => 
-          <div key={data[0].country}
-               className="data-div">
-            <p> <span className="data-titles">Date:</span> {data[0].date || "Date not loaded"}</p>
-            <p> <span className="data-titles">Confirmed Cases:</span> {data[0].confirmed || "confirmed cases not loaded"}</p>
-            <p> <span className="data-titles">Deaths:</span> {data[0].deaths || 0 ||  "total deaths not loaded"}</p>
-          </div>
-      )}
       { myProvinces.length > 0 && myProvinces.map(data =>
          <div className="data-div"
               key={data.province}>
@@ -97,7 +89,9 @@ class StateComp extends React.Component {
           <p> <span className="data-titles">Deaths:</span> {data.deaths || 0 ||  "total deaths not loaded"}</p>
          </div>
         )}
-   <SelectedState apiData2={apiData2}/>
+   <SelectedState apiData2={apiData2}
+                  fetchStateCovid={this.fetchStateCovid}
+                  />
    </div>
   )}
 }

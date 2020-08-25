@@ -12,11 +12,11 @@ class SelectedCountry extends React.Component {
  
   render() {
     const {selectedApiData} = this.props;
-    console.log('selectedCountryApi: ', selectedApiData);
+    // console.log('selectedCountryApi: ', selectedApiData);
     return(
       <div>
         <h2>User Selected Country</h2>
-        <SelectComp label="Country" 
+        <SelectComp name="Country" 
         handleChange={this.props.handleChange}
         selectCountry={this.props.selectCountry}
         />
