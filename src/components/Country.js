@@ -22,13 +22,11 @@ class Country extends React.Component {
       // console.log("selected:", this.state.selectCountry)
       this.selectedCountryFetch(this.state.selectCountry);
     }
-
   
-    
   fetchCovid = async (country) => {
     // console.log(date);
     // console.log(country);
-  
+    // `https://covid-19-data.p.rapidapi.com/report/country/name?date-format=YYYY-MM-DD&format=json&date=08-01-2020&name=Italy`
     const response = await fetch(
       `https://covid-19-data.p.rapidapi.com/country?format=json&name=${country}`,
       {
@@ -43,6 +41,7 @@ class Country extends React.Component {
     ).then(data => {
       // console.log("fetchCovd:", data);
       // console.log(data[0].country);
+      // console.log('date-', data[0].lastChange);
 
       this.setState({apiData: [...this.state.apiData, data]});
       // console.log('the-state:', this.state);
@@ -63,6 +62,7 @@ class Country extends React.Component {
     
     // return results; 
   }// end fectchCovid
+
 
   // const selectCountry = this.state.selectCountry;
   selectedCountryFetch = async (countryCode) => {
@@ -114,8 +114,26 @@ class Country extends React.Component {
     // const {} = this.state;
 
     if(apiData.length> 0) {
-      //  console.log(apiData[0].code);
+      console.log(apiData);
+       console.log(apiData[0][0].code);
+      const dataDate = apiData[0][0].lastUpdate;
+      console.log(dataDate);
+
+      const date = new Date(dataDate);
+      const year = date.getFullYear();
+      let month = date.getMonth()+1;
+      let dt = date.getDate();
+
+      if (dt < 10) {
+        dt = '0' + dt;
+      }
+      if(month < 10) {
+        month = '0' + month;
+      }
+      const reformatted = `${month}/${dt}/${year}`;
+      console.log(reformatted);
     }
+   
 
     return (
         <div>
